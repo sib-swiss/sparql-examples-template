@@ -20,5 +20,5 @@ Correct the LICSENSE.md and CITATION.cff to account for your project.
 
 # The QA and markdown 
 
-Can be found in the project [SIB SPARQL Examples Utils](https://github.com/sib-swiss/sparql-examples-utils/
+Can be found in the project [SIB SPARQL Examples Utils](https://github.com/sib-swiss/sparql-examples-utils/)
 
