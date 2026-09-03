@@ -22,3 +22,14 @@ Correct the LICSENSE.md and CITATION.cff to account for your project.
 
 Can be found in the project [SIB SPARQL Examples Utils](https://github.com/sib-swiss/sparql-examples-utils/)
 
+# How to test github page rendering locally
+
+```sh
+docker build -t sparql-examples-template .
+docker run --rm -v "$PWD":/srv/jekyll sparql-examples-template bundler exec jekyll build --watch &
+python3 -m http.server 8792 --directory _site
+```
+Build a local docker image that has the right Jekyll version and use that to build the webpages.
+Then serve that with the python3 inbuild basic http server.
+Open a browser locally at `http://localhost:8792/` to see the rendered HTML.
+

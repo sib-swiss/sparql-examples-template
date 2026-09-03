@@ -22,20 +22,20 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v5
       with:
-        distribution: 'temurin'
-        java-version: '21'
+        distribution: 'graalvm'
+        java-version: '25'
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: '3.x'
 
     - name: Download sparql-examples-utils.jar
-      run: wget "https://github.com/sib-swiss/sparql-examples-utils/releases/download/v2.0.22/sparql-examples-utils-2.0.22-uber.jar" -O sparql-examples-utils.jar
+      run: wget "https://github.com/sib-swiss/sparql-examples-utils/releases/download/v2.0.24/sparql-examples-utils-2.0.24-uber.jar" -O sparql-examples-utils.jar
 
     - name: Parse issue and create turtle file
       id: create_ttl
-      run: java -jar sparql-examples-utils.jar import-github-issue -i ./examples -t tmp 2> error.log >> $GITHUB_OUTPUT
+      run: java -Xss8m -jar sparql-examples-utils.jar import-github-issue -i ./examples -t tmp 2> error.log >> $GITHUB_OUTPUT
       env:
         GITHUB_ISSUE_BODY: ${{ github.event.issue.body }}
 
@@ -83,7 +83,7 @@ jobs:
           const targetPath = '${{ steps.create_ttl.outputs.output_file }}';
           const comment = `## ✅ Query validation successful
 
-          Your SPARQL query `${targetPath}` has been validated and a pull request has been created for review.
+          Your SPARQL query \`${targetPath}\` has been validated and a pull request has been created for review.
 
           The query will be added to the SPARQL examples collection once the pull request is reviewed and merged.
 
